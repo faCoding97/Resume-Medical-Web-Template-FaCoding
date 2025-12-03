@@ -28,11 +28,11 @@ const mapUrl = (q) =>
 
 export default function Header() {
   const {
-    name = "Dr. Your Name",
+    name = "Dr. Anre Anvari",
     title = "Emergency Medicine • Research • Patient Safety",
-    email = "you@example.com",
-    phoneIntl = "+27000000000",
-    phonePretty = "+27 00 000 0000",
+    email = "anreanvari1@gmail.com",
+    phoneIntl = "+27627330527",
+    phonePretty = "+27 62 733 0527",
     location = "South Africa",
   } = resume?.contact || {};
 
