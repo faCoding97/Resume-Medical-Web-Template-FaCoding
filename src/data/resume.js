@@ -60,7 +60,7 @@ const contact = {
  * ----------------------------------------------
  */
 const profile =
-  "Qualified medical practitioner passionate about medicine and a healthy lifestyle. Keen interest in General Surgery, Emergency Medicine, ICU & Trauma. Experienced in minor surgical procedures (suturing, lipoma excision, keloid injections, abscess drainage), prescriptions, and patient notes.";
+  "Independent medical practitioner passionate about medicine and a healthy lifestyle. Keen interest in General Surgery, Emergency Medicine, ICU & Trauma. Experienced in minor surgical procedures (suturing, lipoma excision, keloid injections, abscess drainage), prescriptions, and patient notes.";
 
 /** ---------------------------------------------
  * SKILLS
@@ -94,7 +94,7 @@ const experience = [
   {
     title: "Medical Doctor — Community Service",
     org: "Schweizer Reneke Hospital",
-    period: "2025 – Present",
+    period: "2025",
     bullets: [
       "Performed minor surgical procedures: lipoma excision, circumcisions, Tru-Cut biopsy, keloid injections, abscess drainage.",
       "General medical officer duties including Cesarean Section, regional anesthesia (spinal), reductions & POP.",
