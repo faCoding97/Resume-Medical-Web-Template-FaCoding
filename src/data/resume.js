@@ -48,9 +48,9 @@ const contact = {
    * Consumers can show icons if present.
    */
   social: {
-    linkedin: undefined, // e.g. "https://www.linkedin.com/in/your-handle"
-    github: undefined,
-    website: undefined,
+    linkedin: "https://www.linkedin.com/in/farazaghababayi", // e.g. "https://www.linkedin.com/in/your-handle"
+    github: "https://github.com/faCoding97",
+    website: "https://facoding.elixflare.com/",
   },
 };
 
@@ -60,7 +60,7 @@ const contact = {
  * ----------------------------------------------
  */
 const profile =
-  "Independent medical practitioner passionate about medicine and a healthy lifestyle. Keen interest in General Surgery, Emergency Medicine, ICU & Trauma. Experienced in minor surgical procedures (suturing, lipoma excision, keloid injections, abscess drainage), prescriptions, and patient notes.";
+  "Dr. Anre Anvari is a medical doctor based in South Africa specializing in emergency medicine, general surgery, ICU, and trauma care. He has experience in minor surgical procedures, patient management, and clinical decision-making. This website serves as the official digital resume of Dr. Anre Anvari, showcasing his experience, education, and medical expertise.";
 
 /** ---------------------------------------------
  * SKILLS

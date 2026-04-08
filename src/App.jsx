@@ -14,7 +14,7 @@ export default function App() {
       <BackToTop threshold={600} />
       <Header />
       <main className="space-y-8 pb-16">
-        <Section id="profile" title="Profile">
+        <Section id="profile" title="About Dr. Anre Anvari">
           <p>{resume.profile}</p>
         </Section>
 
@@ -30,7 +30,7 @@ export default function App() {
           <p>{resume.courses.join(" • ")}</p>
         </Section>
 
-        <Section id="experience" title="Experience">
+        <Section id="experience" title="Medical Experience of Dr. Anre Anvari">
           {resume.experience.map((job) => (
             <div key={job.title} className="mb-6">
               <h3 className="font-semibold">{job.title}</h3>
@@ -46,7 +46,7 @@ export default function App() {
           ))}
         </Section>
 
-        <Section id="education" title="Education">
+        <Section id="education" title="Education of Dr. Anre Anvari">
           <ul>
             {resume.education.map((ed) => (
               <li key={ed.degree}>

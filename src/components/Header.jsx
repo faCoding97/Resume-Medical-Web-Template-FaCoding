@@ -23,7 +23,7 @@ const pdfName = pdfEntries[0]
 // Small helper to build a Google Maps search URL
 const mapUrl = (q) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    q || ""
+    q || "",
   )}`;
 
 export default function Header() {
@@ -43,7 +43,7 @@ export default function Header() {
   useEffect(() => {
     // Respect prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     // Generate QR code data URL
@@ -60,7 +60,7 @@ export default function Header() {
       (error, url) => {
         if (error) console.error("QR Code generation failed:", error);
         else setQrCodeUrl(url);
-      }
+      },
     );
   }, []);
 
@@ -99,7 +99,7 @@ export default function Header() {
               {/* Email */}
               <a
                 href={`mailto:${email}?subject=${encodeURIComponent(
-                  "Contact via Resume"
+                  "Contact via Resume",
                 )}`}
                 className="group/email relative inline-flex items-center gap-2 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50 rounded"
                 aria-label="Send email">
@@ -151,8 +151,8 @@ export default function Header() {
                 {location}
               </a>
 
-              {/* Download PDF */}
-              <a
+              {/* Download PDF  Comment teprory*/}
+              {/* <a
                 href={pdfUrl}
                 download={pdfName}
                 className="group/dl inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-400/10 ring-1 ring-emerald-300/30 hover:bg-emerald-400/20 transition"
@@ -161,7 +161,7 @@ export default function Header() {
                 <span className="group-hover/dl:animate-[dlFlash_1.1s_ease-in-out]">
                   Download PDF
                 </span>
-              </a>
+              </a> */}
 
               {/* Download QR Code with Popup */}
               <div
