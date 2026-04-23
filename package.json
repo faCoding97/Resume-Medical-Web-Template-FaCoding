@@ -1,20 +1,20 @@
 {
-  "name": "medical-resume-spa",
-  "version": "1.0.0",
+  "name": "anre-medical-website",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-site-assets.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/generate-site-assets.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
-    "framer-motion": "^11.2.6",
     "lucide-react": "^0.473.0",
-    "qrcode": "^1.5.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.9.3"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",

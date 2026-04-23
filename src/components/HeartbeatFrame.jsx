@@ -1,37 +1,19 @@
-// src/components/HeartbeatFrame.jsx
 export default function HeartbeatFrame({ children, className = "" }) {
   return (
-    <div
-      className={["group relative rounded-2xl p-[2px]", className].join(" ")}>
-      {/* نور دور کادر — فقط روی hover می‌تپد؛ خارج از hover با همون مدت زمان محو می‌شود */}
+    <div className={["group relative rounded-2xl p-[2px]", className].join(" ")}>
       <div
         aria-hidden
-        className="
-          absolute inset-0 rounded-2xl pointer-events-none
-          group-hover:[animation:hbBorder_var(--hb-dur)_ease-in-out_infinite]
-          will-change-[box-shadow,opacity]
-          [transition:opacity_var(--hb-dur)_ease-in-out]
-          opacity-0 group-hover:opacity-100
-        "
+        className="absolute inset-0 rounded-2xl opacity-0 pointer-events-none [transition:opacity_var(--hb-dur)_ease-in-out] group-hover:opacity-100 group-hover:[animation:hbBorder_var(--hb-dur)_ease-in-out_infinite]"
       />
 
-      {/* محفظه‌ی گلس داخلی با یک رینگ ثابت */}
       <div
-        className="
-          relative rounded-2xl bg-slate-900/70 backdrop-blur-md
-          ring-1 ring-white/10 shadow-[0_8px_28px_rgba(0,0,0,.25)]
-        "
-        data-safe="header">
-        {/* محتوا — روی hover پالس می‌گیرد؛ خارج از hover با همان مدت زمان به scale(1) برمی‌گردد */}
+        className="relative rounded-2xl bg-slate-900/70 ring-1 ring-white/10 shadow-[0_8px_28px_rgba(0,0,0,.25)] backdrop-blur-md"
+        data-safe="header"
+      >
         <div
-          className="
-            group-hover:[animation:hbScale_var(--hb-dur)_ease-in-out_infinite]
-            will-change-transform
-          "
-          style={{
-            transform: "scale(1)",
-            transition: "transform var(--hb-dur) ease-in-out",
-          }}>
+          className="will-change-transform group-hover:[animation:hbScale_var(--hb-dur)_ease-in-out_infinite]"
+          style={{ transform: "scale(1)", transition: "transform var(--hb-dur) ease-in-out" }}
+        >
           {children}
         </div>
       </div>

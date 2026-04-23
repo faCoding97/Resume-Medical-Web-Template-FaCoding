@@ -147,30 +147,30 @@ export default function MedicalBackground() {
         label: "HR",
         unit: "bpm",
         color: "rgba(16,185,129,1)",
-        min: 58,
-        max: 88,
+        min: 50,
+        max: 119,
       },
       {
-        label: "SpO₂",
+        label: "Sats",
         unit: "%",
         color: "rgba(56,189,248,1)",
-        min: 95,
-        max: 100,
+        min: 92,
+        max: 99,
       },
       {
         label: "NIBP",
         unit: "mmHg",
         color: "rgba(241,245,249,1)",
-        min: 104,
-        max: 128,
+        min: 90,
+        max: 139,
         systolic: true,
       },
       {
         label: "RR",
         unit: "rpm",
         color: "rgba(244,63,94,1)",
-        min: 10,
-        max: 22,
+        min: 8,
+        max: 19,
       },
     ];
 
@@ -198,8 +198,8 @@ export default function MedicalBackground() {
       return v;
     }
     function randomBP() {
-      const sys = Math.round(rnd(110, 130));
-      const dia = Math.round(rnd(70, 88));
+      const sys = Math.round(rnd(90, 139));
+      const dia = Math.round(rnd(60, 99));
       return `${sys}/${dia}`;
     }
 

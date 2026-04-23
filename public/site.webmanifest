@@ -1,0 +1,16 @@
+{
+  "name": "Dr. Anré Anise Anvari",
+  "short_name": "Dr. Anré Anise Anvari",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

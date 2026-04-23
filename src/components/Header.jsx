@@ -1,204 +1,134 @@
-import { useEffect, useState, useRef } from "react";
-import { Stethoscope, Mail, MapPin, Phone, Download } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import QRCode from "qrcode";
+import { useEffect, useState } from "react";
+import { Download, Mail, Phone } from "lucide-react";
 import HeartbeatFrame from "./HeartbeatFrame";
-import resume from "../data/resume";
+import ProfileImage from "./ProfileImage";
+import siteConfig from "../content/site.config";
 
-/**
- * Resolve a single PDF from /src/assets/resume/*
- * - Keep only ONE file in that folder.
- * - We expose both the built URL and the original filename for the "download" attribute.
- */
-const pdfMap = import.meta.glob("/src/assets/resume/*.pdf", {
-  eager: true,
-  as: "url",
-});
-const pdfEntries = Object.entries(pdfMap);
-const pdfUrl = pdfEntries[0]?.[1] || "/resume.pdf"; // fallback if none found
-const pdfName = pdfEntries[0]
-  ? pdfEntries[0][0].split("/").pop() // original filename from path
-  : "resume.pdf";
-
-// Small helper to build a Google Maps search URL
-const mapUrl = (q) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    q || "",
-  )}`;
+const { site, person, hero } = siteConfig;
 
 export default function Header() {
-  const {
-    name = "Dr. Anre Anvari",
-    title = "Emergency Medicine • Research • Patient Safety",
-    email = "anreanvari1@gmail.com",
-    phoneIntl = "+27627330527",
-    phonePretty = "+27 62 733 0527",
-    location = "South Africa",
-  } = resume?.contact || {};
-
-  const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const buttonRef = useRef(null);
+  const [showContact, setShowContact] = useState(false);
+  const [contactCounter, setContactCounter] = useState(0);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    // Generate QR code data URL
-    QRCode.toDataURL(
-      "https://anreanvari.elixflare.com/",
-      {
-        width: 200, // Smaller for popup
-        margin: 2,
-        color: {
-          dark: "#1e3a8a", // Tailwind blue-900 for medical aesthetic
-          light: "#f3f4f6", // Tailwind gray-100 for sterile background
-        },
-      },
-      (error, url) => {
-        if (error) console.error("QR Code generation failed:", error);
-        else setQrCodeUrl(url);
-      },
-    );
+    try {
+      const stored = window.localStorage.getItem("contactRevealCount");
+      if (stored) {
+        const parsed = Number.parseInt(stored, 10);
+        if (!Number.isNaN(parsed)) setContactCounter(parsed);
+      }
+    } catch {
+      // no-op
+    }
   }, []);
 
-  // Handle QR code download
-  const handleQRDownload = () => {
-    if (qrCodeUrl) {
-      const link = document.createElement("a");
-      link.href = qrCodeUrl;
-      link.download = "anre-anvari-resume-qr.png";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+  const revealContact = () => {
+    const next = contactCounter + 1;
+    setShowContact(true);
+    setContactCounter(next);
+    try {
+      window.localStorage.setItem("contactRevealCount", String(next));
+    } catch {
+      // no-op
     }
   };
+
+  const primaryEmailHref = `mailto:${person.email}?subject=${encodeURIComponent(`Opportunity for ${person.name}`)}`;
 
   return (
     <header className="relative z-20 mx-auto max-w-5xl px-4 pt-8">
       <HeartbeatFrame>
-        <div className="px-5 py-4">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            {/* Name + title */}
+        <div className="px-5 py-7 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-[1.45fr_.85fr] lg:items-start">
             <div>
-              <h1 className="group/name text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight flex items-center gap-3">
-                <span className="group/icon relative inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-300 ring-1 ring-emerald-300/30 shadow-[0_0_24px_rgba(16,185,129,.25)]">
-                  <Stethoscope className="h-6 w-6 group-hover/icon:animate-[stethPulse_1s_ease-in-out]" />
-                </span>
-                <span className="relative inline-block group-hover/name:animate-[nameGlow_1.1s_ease-in-out]">
-                  {name}
-                </span>
+              <div className="inline-flex rounded-full border border-emerald-300/20 bg-emerald-400/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-emerald-100">
+                {hero.eyebrow}
+              </div>
+
+              <h1 className="mt-5 text-[clamp(2.1rem,4.8vw,3.8rem)] font-bold leading-[1.05] tracking-tight text-white">
+                {person.name}
               </h1>
-              {title ? <p className="mt-2 text-slate-300">{title}</p> : null}
+
+              <p className="mt-4 text-[1.05rem] font-medium text-slate-200/95">
+                {person.title}
+              </p>
+
+              <p className="mt-5 max-w-3xl text-[1rem] leading-8 text-slate-300/95">
+                {person.summary}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200/90">
+                  South Africa
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200/90">
+                  General Surgery
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200/90">
+                  Emergency Medicine
+                </span>
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200/90">
+                  ICU
+                </span>
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-3 text-sm">
+                <button
+                  type="button"
+                  onClick={revealContact}
+                  className="inline-flex items-center gap-2 rounded-xl border border-emerald-300/20 bg-emerald-400/10 px-5 py-3 font-medium text-emerald-100 transition hover:bg-emerald-400/20"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>{hero.contactButtonLabel}</span>
+                </button>
+
+                <a
+                  href={site.resumePdfPath}
+                  download
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
+                >
+                  <Download className="h-4 w-4" />
+                  {hero.ctaPrimaryLabel}
+                </a>
+
+                <a
+                  href={primaryEmailHref}
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-medium text-white transition hover:bg-white/10"
+                >
+                  <Mail className="h-4 w-4" />
+                  {hero.ctaSecondaryLabel}
+                </a>
+              </div>
+
+              {showContact ? (
+                <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-200/95">
+                  <a
+                    href={`tel:${person.phoneIntl}`}
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10"
+                  >
+                    <Phone className="h-4 w-4 text-emerald-300" />
+                    <span>{person.phonePretty}</span>
+                  </a>
+
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10"
+                  >
+                    <Mail className="h-4 w-4 text-emerald-300" />
+                    <span>{person.email}</span>
+                  </a>
+                </div>
+              ) : null}
             </div>
 
-            {/* Contacts */}
-            <div className="flex flex-wrap items-center gap-3 text-sm text-slate-300">
-              {/* Email */}
-              <a
-                href={`mailto:${email}?subject=${encodeURIComponent(
-                  "Contact via Resume",
-                )}`}
-                className="group/email relative inline-flex items-center gap-2 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50 rounded"
-                aria-label="Send email">
-                <span className="relative inline-flex">
-                  <Mail className="h-4 w-4" />
-                  <span
-                    aria-hidden
-                    className="absolute -right-1 -top-1 h-1.5 w-1.5 rounded-full bg-white/80 opacity-0 group-hover/email:opacity-100 group-hover/email:animate-[emailSpark_900ms_ease-out] transition-opacity"
-                  />
-                </span>
-                <span className="relative">
-                  {email}
-                  <span
-                    aria-hidden
-                    className="absolute left-0 -bottom-0.5 h-[2px] w-full origin-left scale-x-0 bg-emerald-400 group-hover/email:scale-x-100 transition-transform [transition-duration:var(--hb-dur)]"
-                  />
-                </span>
-              </a>
-
-              {/* Phone */}
-              <a
-                href={`tel:${phoneIntl}`}
-                className="group/phone relative inline-flex items-center gap-2 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50 rounded"
-                aria-label="Call phone number">
-                <span className="relative inline-flex">
-                  <Phone className="h-4 w-4 group-hover/phone:animate-[phoneTilt_900ms_ease-in-out]" />
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover/phone:opacity-100 group-hover/phone:animate-[phoneRipple_1000ms_ease-out]"
-                  />
-                </span>
-                {phonePretty}
-              </a>
-
-              {/* Location */}
-              <a
-                href={mapUrl(location)}
-                target="_blank"
-                rel="noreferrer"
-                className="group/loc relative inline-flex items-center gap-2 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50 rounded"
-                aria-label="Open location in Google Maps">
-                <span className="relative inline-flex">
-                  <MapPin className="h-4 w-4 group-hover/loc:animate-[pinBounce_900ms_ease-in-out]" />
-                  <span
-                    aria-hidden
-                    className="absolute -inset-2 rounded-full opacity-0 group-hover/loc:opacity-100 group-hover/loc:animate-[pinHalo_1100ms_ease-out]"
-                  />
-                </span>
-                {location}
-              </a>
-
-              {/* Download PDF  Comment teprory*/}
-              {/* <a
-                href={pdfUrl}
-                download={pdfName}
-                className="group/dl inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-400/10 ring-1 ring-emerald-300/30 hover:bg-emerald-400/20 transition"
-                aria-label="Download resume PDF">
-                <Download className="h-4 w-4 group-hover/dl:animate-[dlBounce_1s_ease-in-out]" />
-                <span className="group-hover/dl:animate-[dlFlash_1.1s_ease-in-out]">
-                  Download PDF
-                </span>
-              </a> */}
-
-              {/* Download QR Code with Popup */}
-              <div
-                className="relative"
-                onMouseEnter={() => setIsPopupOpen(true)}
-                onMouseLeave={() => setIsPopupOpen(false)}>
-                <button
-                  onClick={handleQRDownload}
-                  className="group/qr inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-400/10 ring-1 ring-emerald-300/30 hover:bg-emerald-400/20 transition disabled:opacity-50"
-                  aria-label="Download QR code for digital resume"
-                  disabled={!qrCodeUrl}>
-                  <Download className="h-4 w-4 group-hover/qr:animate-[dlBounce_1s_ease-in-out]" />
-                  <span className="group-hover/qr:animate-[dlFlash_1.1s_ease-in-out]">
-                    Download QR Code
-                  </span>
-                </button>
-                <AnimatePresence>
-                  {isPopupOpen && qrCodeUrl && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-slate-800/90 rounded-lg shadow-lg p-4 z-50 border border-emerald-300/30">
-                      <img
-                        src={qrCodeUrl}
-                        alt="QR Code for Digital Resume"
-                        className="max-w-full h-auto"
-                        style={{ maxWidth: "200px" }}
-                      />
-                      <p className="text-center text-sm text-slate-300/80 mt-2">
-                        Scan to visit my digital resume
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+            <div className="lg:justify-self-end">
+              <ProfileImage
+                src={site.profileImagePath}
+                fallbackSrc={site.profileImageFallbackPath}
+                alt={site.profileImageAlt}
+                logoSrc={site.bannerLogoPath}
+                logoAlt={`${person.name} logo`}
+              />
             </div>
           </div>
         </div>

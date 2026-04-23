@@ -4,25 +4,25 @@
 
 :root {
   color-scheme: dark;
-  --hb-dur: 1.15s; /* مدت‌زمان مشترک */
-  font-family: Inter, ui-sans-serif, system-ui;
+  --hb-dur: 1.15s;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
 }
-@keyframes pulseLine {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #020617;
 }
 
+img {
+  display: block;
+}
 
-
-/*-------------------------------  section  ------------------------------*/
 @keyframes sectionReveal {
   from {
     opacity: 0;
@@ -34,132 +34,6 @@ html {
   }
 }
 
-/* pulse for icons (already exists if you’re using it) */
-@keyframes stethPulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  45% {
-    transform: scale(1.12);
-  }
-}
-
-/*-------------------------------  section  ------------------------------*/
-
-/*-------------------------------  Header  ------------------------------*/
-/* shared duration variable already in your file
-:root { --hb-dur: 1.15s; }
-*/
-
-/* Email: tiny spark + subtle wiggle */
-@keyframes emailSpark {
-  0% {
-    transform: scale(0.4);
-    opacity: 0;
-  }
-  25% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-
-/* Phone: icon tilt */
-@keyframes phoneTilt {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(8deg);
-  }
-  50% {
-    transform: rotate(-6deg);
-  }
-  75% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-/* Phone: expanding ring ripple from the icon */
-@keyframes phoneRipple {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.28);
-    opacity: 0.9;
-  }
-  100% {
-    box-shadow: 0 0 0 12px rgba(16, 185, 129, 0);
-    opacity: 0;
-  }
-}
-
-/* Location: pin bounce */
-@keyframes pinBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  45% {
-    transform: translateY(-3px);
-  }
-}
-
-/* Location: soft halo pulse */
-@keyframes pinHalo {
-  0% {
-    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.28);
-    opacity: 0.9;
-  }
-  100% {
-    box-shadow: 0 0 0 12px rgba(244, 63, 94, 0);
-    opacity: 0;
-  }
-}
-
-/* Download: button text flash */
-@keyframes dlFlash {
-  0%,
-  100% {
-    color: inherit;
-  }
-  50% {
-    color: #34d399;
-  } /* emerald */
-}
-
-/* Download: icon bounce */
-@keyframes dlBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-3px);
-  }
-  70% {
-    transform: translateY(2px);
-  }
-}
-
-/* Name: glow pulse */
-@keyframes nameGlow {
-  0%,
-  100% {
-    text-shadow: none;
-  }
-  50% {
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.55),
-      0 0 20px rgba(244, 63, 94, 0.35);
-  }
-}
-
-/* Stethoscope icon: heartbeat pulse */
 @keyframes stethPulse {
   0%,
   100% {
@@ -173,36 +47,6 @@ html {
   }
 }
 
-/*-------------------------------  Header  ------------------------------*/
-
-/* حرکت نور مورّبِ چراغ اتاق عمل */
-/* src/index.css */
-@keyframes orLampSweep {
-  0% {
-    transform: translateX(-30%) translateY(-8%);
-    opacity: 0.18;
-  }
-  35% {
-    transform: translateX(25%) translateY(6%);
-    opacity: 0.32;
-  }
-  100% {
-    transform: translateX(110%) translateY(18%);
-    opacity: 0.18;
-  }
-}
-
-/* چرخش نرم لایه‌ی گرادیان (به جای تغییر رنگ تند) */
-@keyframes spinSlow {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* نور دور کادر: سبز استریل + قرمز خون */
 @keyframes hbBorder {
   0%,
   100% {
@@ -223,34 +67,34 @@ html {
   }
   45% {
     transform: scale(1.01);
-  } /* اگر زیاد بود 1.015 یا 1.01 */
+  }
 }
 
-/* src/index.css */
 @media print {
   * {
     animation: none !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
+
   body {
-    background: #fff !important;
-    color: #111;
+    background: #ffffff !important;
+    color: #111111 !important;
   }
+
+  canvas,
   .pointer-events-none {
     display: none !important;
-  } /* بک‌گراندهای متحرک حذف */
+  }
+
   a::after {
     content: " (" attr(href) ")";
+    color: #555555;
     font-size: 12px;
-    color: #555;
   }
-  .card,
+
   [data-safe="header"] {
-    background: #fff !important;
-    border: 1px solid #ddd !important;
+    border: 1px solid #d1d5db !important;
+    background: #ffffff !important;
   }
 }
-
-
-
