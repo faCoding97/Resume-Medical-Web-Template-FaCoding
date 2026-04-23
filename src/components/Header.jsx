@@ -57,25 +57,24 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={revealContact}
-                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/20 bg-emerald-400/10 px-4 py-2.5 font-medium text-emerald-100 transition hover:bg-emerald-400/20"
-                >
+                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/20 bg-emerald-400/10 px-4 py-2.5 font-medium text-emerald-100 transition hover:bg-emerald-400/20">
                   <Phone className="h-4 w-4" />
                   <span>{hero.contactButtonLabel}</span>
                 </button>
 
-                <a
+                {/* temprory this one is enabled */}
+                {/* <a
                   href={site.resumePdfPath}
                   download
                   className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 font-medium text-white transition hover:bg-white/10"
                 >
                   <Download className="h-4 w-4" />
                   {hero.ctaPrimaryLabel}
-                </a>
+                </a> */}
 
                 <a
                   href={primaryEmailHref}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 font-medium text-white transition hover:bg-white/10"
-                >
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 font-medium text-white transition hover:bg-white/10">
                   <Mail className="h-4 w-4" />
                   {hero.ctaSecondaryLabel}
                 </a>
@@ -85,16 +84,14 @@ export default function Header() {
                 <div className="mt-4 flex flex-wrap gap-2.5 text-sm text-slate-200/95">
                   <a
                     href={`tel:${person.phoneIntl}`}
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 hover:bg-white/10"
-                  >
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 hover:bg-white/10">
                     <Phone className="h-4 w-4 text-emerald-300" />
                     <span>{person.phonePretty}</span>
                   </a>
 
                   <a
                     href={`mailto:${person.email}`}
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 hover:bg-white/10"
-                  >
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2.5 hover:bg-white/10">
                     <Mail className="h-4 w-4 text-emerald-300" />
                     <span>{person.email}</span>
                   </a>
