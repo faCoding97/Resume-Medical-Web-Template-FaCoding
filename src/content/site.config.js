@@ -37,7 +37,7 @@ const siteConfig = {
     availability:
       "Independent medical practitioner with experience across North West, Free State, Eastern Cape, and Western Cape.",
     summary:
-      "Independent medical practitioner with experience across South Africa, including North West, Free State, Eastern Cape, and Western Cape. Background includes minor surgical procedures, surgical assistance, emergency care, ICU support, and confident clinical decision-making in high-pressure environments.",
+      "Independent medical practitioner with clinical experience across South Africa, including North West, Free State, Eastern Cape, and Western Cape. Background includes minor procedures, surgical assistance, emergency care, ICU support, and patient-centred decision-making.",
     about: [
       "Dr. Anré Anise Anvari is an independent medical practitioner having worked all over South Africa in multiple different provinces, including North West, Free State, Eastern Cape, and Western Cape.",
       "He has experience in performing minor surgical procedures on his own, holistic patient management, and life-saving clinical decision-making.",
@@ -62,7 +62,7 @@ const siteConfig = {
     badge: "Profile Photo",
     ctaPrimaryLabel: "Download CV",
     ctaSecondaryLabel: "Email",
-    contactButtonLabel: "View Contact Details",
+    contactButtonLabel: "Contact",
     contactCounterLabel: "views",
     supportingText:
       "To update the portrait later, simply replace public/profile-photo.jpg with your own profile photo.",
